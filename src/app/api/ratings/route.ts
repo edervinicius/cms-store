@@ -5,7 +5,7 @@ const ratingService = new RatingService();
 const userService = new UserService();
 
 export async function POST(req: Request) {
-  const { userName, comment, rating, storeId } = await req.json();
+  const { userName, comment, rating, storeId, productId } = await req.json();
 
   if (!userName)
     return NextResponse.json(
@@ -39,6 +39,18 @@ export async function POST(req: Request) {
   if (!user) {
     user = await userService.create(userName);
   }
+
+  if (productId) {
+    await ratingService.create(
+      comment,
+      rating,
+      user.id,
+      parseInt(storeId, 10),
+      productId
+    );
+    return NextResponse.json({ message: `Rating created` });
+  }
+
   await ratingService.create(comment, rating, user.id, parseInt(storeId, 10));
 
   return NextResponse.json({ message: `Rating created` });

@@ -17,6 +17,7 @@ export class RatingService {
       where: { id },
       include: {
         user: true,
+        product: true,
       },
     });
   }
@@ -28,6 +29,7 @@ export class RatingService {
       },
       include: {
         user: true,
+        product: true,
       },
       orderBy: {
         createdAt: "desc",
@@ -39,10 +41,11 @@ export class RatingService {
     comment: string,
     rating: number,
     userId: number,
-    storeId: number
+    storeId: number,
+    productId?: number
   ): Promise<Rating> {
     return prisma.rating.create({
-      data: { comment, storeId, userId, rating },
+      data: { comment, storeId, userId, rating, productId },
     });
   }
 

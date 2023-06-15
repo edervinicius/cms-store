@@ -14,7 +14,7 @@ interface SelectProps {
 export const Select: React.FC<SelectProps> = ({ options, value, onChange }) => {
   return (
     <select
-      className="block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+      className="block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none"
       value={value}
       onChange={onChange}
     >

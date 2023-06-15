@@ -11,6 +11,7 @@ import {
   Button,
   Pill,
   Loading,
+  Select,
 } from "@/components";
 import { formatPrice, roundRating } from "@/utils";
 
@@ -22,12 +23,27 @@ interface IComment {
   storeId: number;
   updatedAt: string;
   user: { id: number; name: string; createdAt: string; updatedAt: string };
+  product?: {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    image: string;
+  };
 }
 interface IMenu {
   name: string;
   description: string;
   price: number;
   image: string;
+}
+interface IProduct {
+  name: string;
+  id: number;
+}
+interface IProductOptions {
+  label: string;
+  value: number;
 }
 
 export default function Store({ params }: { params: { id: number } }) {
@@ -42,6 +58,8 @@ export default function Store({ params }: { params: { id: number } }) {
   const [ratingValue, setRatingValue] = useState<number>(0.5);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [comments, setComments] = useState<IComment[]>([]);
+  const [productId, setProductId] = useState<number>(0);
+  const [productOptions, setProductOptions] = useState<IProductOptions[]>();
 
   const getRating = async () => {
     fetch(`/api/ratings/${params.id}`)
@@ -69,6 +87,7 @@ export default function Store({ params }: { params: { id: number } }) {
         comment,
         rating: ratingValue,
         storeId: params.id,
+        productId,
       }),
     })
       .then(async (res) => {
@@ -80,25 +99,23 @@ export default function Store({ params }: { params: { id: number } }) {
   const getStores = async () => {
     fetch(`/api/stores/${params.id}`)
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+      .then(async (data) => {
         setName(data.name);
         setAddress(data.address);
         setDescription(data.description);
         setImage(data.image);
         setMenu(data.products);
-        const sum = data.ratings.reduce(
-          (accumulator: number, item: any) => accumulator + item.rating,
-          0
-        );
-
-        setRating(roundRating(sum / data.length));
+        let prodOpts = [{ value: 0, label: "none" }];
+        data.products.map((v: IProduct) => {
+          prodOpts.push({ value: v.id, label: v.name });
+        });
+        setProductOptions(prodOpts);
+        await getRating();
       });
   };
 
   useEffect(() => {
     getStores();
-    getRating();
   }, []);
 
   if (!name)
@@ -169,7 +186,7 @@ export default function Store({ params }: { params: { id: number } }) {
             {submitted ? (
               <Alert message="Review submitted successfully!" type="success" />
             ) : (
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} className="max-w-min">
                 <div className="mb-4">
                   <label
                     htmlFor="comment"
@@ -181,6 +198,18 @@ export default function Store({ params }: { params: { id: number } }) {
                     id="userName"
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
+                  />
+                </div>
+                <div className="mb-4">
+                  <label
+                    htmlFor="subject"
+                    className="text-gray-700 block mb-1 font-semibold"
+                  >
+                    Product:
+                  </label>
+                  <Select
+                    options={productOptions}
+                    onChange={(e) => setProductId(parseInt(e.target.value, 10))}
                   />
                 </div>
                 <div className="mb-4">
@@ -224,14 +253,33 @@ export default function Store({ params }: { params: { id: number } }) {
               <ul className="mb-4 divide-y divide-slate-100">
                 {comments.map((comment, index) => (
                   <li key={index} className="text-gray-700 py-2">
-                    <p>
+                    <p className="flex items-center gap-4 mb-2">
                       <b>{comment.user.name}</b>
+                      <small className="bg-slate-100 text-xs py-1 px-2 rounded-lg">
+                        {moment(comment.createdAt).format("YYYY-MM-DD")}
+                      </small>
                     </p>
-                    <small>
-                      {moment(comment.createdAt).format("YYYY-MM-DD")}
-                    </small>
-                    <p>{comment.comment}</p>
-                    <div className="flex items-center py-2">
+                    {comment.product ? (
+                      <div className="flex items-start justify-start space-x-4">
+                        <div className="w-1/6">
+                          <img
+                            src={comment.product.image}
+                            alt="Imagem"
+                            className="h-auto max-w-full rounded-md"
+                          />
+                        </div>
+                        <div className="w-2/3">
+                          <h2 className="text-sm font-bold">
+                            {comment.product.name}
+                          </h2>
+                          <p className="text-gray-600">{comment.comment}</p>
+                        </div>
+                      </div>
+                    ) : (
+                      <p>{comment.comment}</p>
+                    )}
+
+                    <div className="flex items-center py-2 gap-1">
                       <Pill
                         text={comment.rating.toString()}
                         color={

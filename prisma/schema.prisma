@@ -53,6 +53,8 @@ model Rating {
   userId    Int
   store     Store @relation(fields: [storeId], references: [id])
   storeId   Int 
+  product   Product? @relation(fields: [productId], references: [id])
+  productId Int? 
   createdAt DateTime        @default(now()) @db.Timestamp(6)
   updatedAt DateTime        @updatedAt
 
@@ -69,6 +71,7 @@ model Product {
   storeId     Int
   createdAt   DateTime @default(now()) @db.Timestamp(6)
   updatedAt   DateTime @updatedAt
+  ratings   Rating[]
 
   @@map("product")
 }
