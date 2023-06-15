@@ -91,7 +91,8 @@ export default function Store({ params }: { params: { id: number } }) {
           (accumulator: number, item: any) => accumulator + item.rating,
           0
         );
-        setRating(sum);
+
+        setRating(roundRating(sum / data.length));
       });
   };
 
