@@ -7,7 +7,6 @@ Smunch Eder Test
 - [Installation](#installation)
 - [Usage](#usage)
 - [Prerequisites](#prerequisites)
-- [Prisma](#prisma)
 
 ## Installation
 
