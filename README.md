@@ -1,34 +1,78 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project
 
-## Getting Started
+Smunch Eder Test
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- [Installation](#installation)
+- [Usage](#usage)
+- [Prerequisites](#prerequisites)
+- [Prisma](#prisma)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To run this project, you need to have Node.js and Docker installed on your system.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Node.js
 
-## Learn More
+1. Visit the official Node.js website: [https://nodejs.org](https://nodejs.org)
+2. Download and install the appropriate version of Node.js for your operating system.
+3. Verify the installation by running the following command in your terminal:
 
-To learn more about Next.js, take a look at the following resources:
+   ```shell
+   node --version
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   It should display the installed Node.js version.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Docker
 
-## Deploy on Vercel
+1. Visit the official Docker website: [https://www.docker.com](https://www.docker.com)
+2. Download and install Docker for your operating system.
+3. Verify the installation by running the following command in your terminal:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```shell
+   docker --version
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   It should display the installed Docker version.
+
+## Usage
+
+1. Clone the repository
+
+2. Navigate to the project directory
+
+3. Install the dependencies:
+
+   ```shell
+   npm install
+   ```
+
+4. Start the application using Docker Compose:
+
+   ```shell
+   docker-compose up -d
+   ```
+
+5. Install Prisma globally:
+
+   ```shell
+   npm install -g prisma
+   ```
+
+6. Start the application:
+
+   ```shell
+   npm start
+   ```
+
+7. Open your browser and visit [http://localhost:3000](http://localhost:3000) to view the application.
+
+## Prerequisites
+
+This project assumes familiarity with the following concepts:
+
+- JavaScript/TypeScript
+- Node.js and NPM (Node Package Manager)
+- RESTful APIs
