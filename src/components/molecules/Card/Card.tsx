@@ -2,7 +2,7 @@ import { FC } from "react";
 
 interface CardProps {
   title?: string;
-  children?: string | JSX.Element | JSX.Element[];
+  children?: string | JSX.Element | JSX.Element[] | any;
 }
 
 export const Card: FC<CardProps> = ({ title, children }) => {

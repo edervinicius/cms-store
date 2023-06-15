@@ -80,7 +80,7 @@ export default function Home() {
   return (
     <main className="flex justify-center">
       <div className="max-w-5xl w-full">
-        <h1 className="text-2xl font-bold mb-4">Smunch's Restaurants</h1>
+        <h1 className="text-2xl font-bold mb-4">Smunch Restaurant</h1>
 
         <div className="mb-4 max-w-sm">
           <label
@@ -97,7 +97,7 @@ export default function Home() {
         {filteredStores && filteredStores.length > 0 ? (
           <div className="flex flex-wrap">
             {filteredStores.map((s) => (
-              <div className="w-1/4 p-4">
+              <div key={s.id} className="w-1/4 p-4">
                 <Link href={`/store/${s.id}`}>
                   <RestaurantCard
                     name={s.name}

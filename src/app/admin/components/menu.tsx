@@ -3,13 +3,30 @@
 import React, { useState, useEffect } from "react";
 import { Card, Textarea, Textfield, Select } from "@/components";
 
+interface IStore {
+  id: number;
+  image: string;
+  name: string;
+  description: string;
+  rating: number;
+  cuisine: { name: string };
+}
+interface IStoreOptions {
+  value: number;
+  label: string;
+}
+interface IProduct {
+  id: number;
+  name: string;
+}
+
 export const MenuForm = () => {
-  const [products, setProducts] = useState();
+  const [products, setProducts] = useState<IProduct[]>();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [price, setPrice] = useState(0);
-  const [stores, setStores] = useState();
+  const [stores, setStores] = useState<IStoreOptions[]>();
   const [storeId, setStoreId] = useState<number>(0);
 
   const getProducts = async () => {
@@ -22,13 +39,13 @@ export const MenuForm = () => {
   const getStores = async () => {
     fetch("/api/stores")
       .then((res) => res.json())
-      .then((data) => {
-        const cuisineOptions = data.map((v) => {
+      .then((data: IStore[]) => {
+        const storeOptions: IStoreOptions[] = data.map((v) => {
           return { value: v.id, label: v.name };
         });
-        if (cuisineOptions.length) {
-          setStoreId(cuisineOptions[0].value);
-          setStores(cuisineOptions);
+        if (storeOptions.length) {
+          setStoreId(storeOptions[0].value);
+          setStores(storeOptions);
         }
       });
   };
@@ -39,7 +56,7 @@ export const MenuForm = () => {
       .then(async (res) => await getProducts())
       .then((data) => {});
   };
-  const handleAddProduct = async (e) => {
+  const handleAddProduct = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     fetch(`/api/products`, {
       method: "POST",

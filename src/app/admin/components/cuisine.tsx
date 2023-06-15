@@ -3,12 +3,17 @@
 import React, { useState, useEffect } from "react";
 import { Card, Textfield, Textarea } from "@/components";
 
+interface ICuisine {
+  name: string;
+  id: number;
+}
+
 export const CuisineForm = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [address, setAddress] = useState("");
-  const [cuisines, setCuisines] = useState([]);
+  const [cuisines, setCuisines] = useState<ICuisine[] | null>(null);
 
   const getCuisines = async () => {
     fetch("/api/cuisines")
@@ -17,14 +22,8 @@ export const CuisineForm = () => {
         setCuisines(data);
       });
   };
-  const deleteCuisine = async (id: number) => {
-    fetch(`/api/cuisines/${id}`, {
-      method: "DELETE",
-    })
-      .then(async (res) => await getCuisines())
-      .then((data) => {});
-  };
-  const handleAddCuisine = async (e) => {
+
+  const handleAddCuisine = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     fetch(`/api/cuisines`, {
       method: "POST",

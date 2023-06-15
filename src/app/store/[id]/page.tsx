@@ -42,13 +42,6 @@ export default function Store({ params }: { params: { id: number } }) {
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [comments, setComments] = useState<IComment[]>([]);
 
-  const deleteRating = async (id: number) => {
-    fetch(`/api/ratings/${id}`, {
-      method: "DELETE",
-    })
-      .then(async (res) => await getRating())
-      .then((data) => {});
-  };
   const getRating = async () => {
     fetch(`/api/ratings/${params.id}`)
       .then((res) => res.json())

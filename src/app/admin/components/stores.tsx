@@ -3,13 +3,26 @@
 import React, { useState, useEffect } from "react";
 import { Card, Textfield, Textarea, Select } from "@/components";
 
+interface ICuisine {
+  name: string;
+  id: number;
+}
+interface ICuisineOptions {
+  value: number;
+  label: string;
+}
+interface IStore {
+  id: number;
+  name: string;
+}
+
 export const StoresForm = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [address, setAddress] = useState("");
-  const [stores, setStores] = useState();
-  const [cuisines, setCuisines] = useState();
+  const [stores, setStores] = useState<IStore[]>();
+  const [cuisines, setCuisines] = useState<ICuisineOptions[]>();
   const [cuisineId, setCuisineId] = useState<number>(0);
 
   const getStores = async () => {
@@ -23,7 +36,7 @@ export const StoresForm = () => {
   const getCuisines = async () => {
     fetch("/api/cuisines")
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: ICuisine[]) => {
         const cuisineOptions = data.map((v) => {
           return { value: v.id, label: v.name };
         });

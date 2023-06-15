@@ -8,11 +8,9 @@ interface IPageProps {
 export const Page: FC<IPageProps> = ({ header, content }) => (
   <div>
     {header && (
-      <PageHeader
-        title={header.title}
-        breadcrumbItems={header.breadcrumbItems}
-        children={header.children}
-      />
+      <PageHeader title={header.title} breadcrumbItems={header.breadcrumbItems}>
+        {header.children}
+      </PageHeader>
     )}
     <div className="p-4">{content}</div>
   </div>
