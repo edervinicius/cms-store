@@ -2,12 +2,6 @@
 
 Smunch Eder Test
 
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Prerequisites](#prerequisites)
-
 ## Installation
 
 To run this project, you need to have Node.js and Docker installed on your system.

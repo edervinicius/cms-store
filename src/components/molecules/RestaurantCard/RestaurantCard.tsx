@@ -37,7 +37,7 @@ export const RestaurantCard: FC<IRestaurantCardProps> = ({
   cuisine,
 }) => {
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white transform hover:scale-105 transition duration-300 cursor-pointer ">
+    <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white transform hover:scale-105 transition duration-300 cursor-pointer h-full">
       <div className="relative h-44">
         <img
           src={image}

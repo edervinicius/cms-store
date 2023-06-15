@@ -5,6 +5,7 @@ export const formatPrice = (price: number) => {
   });
 };
 export const roundRating = (number: number) => {
+  if (isNaN(number)) number = 0;
   if (number % 0.5 === 0) {
     return number;
   }
