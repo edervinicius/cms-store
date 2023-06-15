@@ -97,7 +97,7 @@ export default function Home() {
         {filteredStores && filteredStores.length > 0 ? (
           <div className="flex flex-wrap">
             {filteredStores.map((s) => (
-              <div key={s.id} className="w-1/4 p-4">
+              <div key={s.id} className="w-1/4 p-4 h-full">
                 <Link href={`/store/${s.id}`}>
                   <RestaurantCard
                     name={s.name}
