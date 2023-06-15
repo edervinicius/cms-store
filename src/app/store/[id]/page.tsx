@@ -10,6 +10,7 @@ import {
   Textfield,
   Button,
   Pill,
+  Loading,
 } from "@/components";
 import { formatPrice, roundRating } from "@/utils";
 
@@ -99,10 +100,17 @@ export default function Store({ params }: { params: { id: number } }) {
     getRating();
   }, []);
 
+  if (!name)
+    return (
+      <div className="flex justify-center items-center py-96">
+        <Loading />
+      </div>
+    );
+
   return (
     <Page
       header={{
-        title: `Store ${name}`,
+        title: name,
         breadcrumbItems: [
           {
             label: "Store",
