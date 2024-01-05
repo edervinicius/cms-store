@@ -90,16 +90,12 @@ export default function Home() {
   return (
     <main className="flex justify-center">
       <div className="max-w-5xl w-full p-4">
-        <h1 className="text-2xl font-bold mb-4 text-violet-800">
-          Eat Restaurants
-        </h1>
-
         <div className="mb-4 max-w-sm">
           <label
             htmlFor="cuisine"
             className="text-gray-700 block mb-1 font-semibold"
           >
-            Cuisine:
+            Filter:
           </label>
           <Select
             options={cuisines}
