@@ -8,7 +8,7 @@ export const Header: FC = () => {
       <Link href="/">
         <Image
           src="/logo.svg"
-          alt="smunch Logo"
+          alt="Eat Logo"
           width={100}
           height={24}
           priority

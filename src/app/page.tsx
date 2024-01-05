@@ -91,7 +91,7 @@ export default function Home() {
     <main className="flex justify-center">
       <div className="max-w-5xl w-full p-4">
         <h1 className="text-2xl font-bold mb-4 text-violet-800">
-          Smunch Restaurants
+          Eat Restaurants
         </h1>
 
         <div className="mb-4 max-w-sm">

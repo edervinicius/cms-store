@@ -1,7 +1,5 @@
 # Project
 
-Smunch Eder Test
-
 ## Installation
 
 To run this project, you need to have Node.js and Docker installed on your system.
@@ -52,15 +50,22 @@ To run this project, you need to have Node.js and Docker installed on your syste
 
    ```shell
    npm install -g prisma
+
    ```
 
-6. Start the application:
+6. Run migrations:
+
+   ```shell
+   prisma db push
+   ```
+
+7. Start the application:
 
    ```shell
    npm start
    ```
 
-7. Open your browser and visit [http://localhost:3000](http://localhost:3000) to view the application.
+8. Open your browser and visit [http://localhost:3000](http://localhost:3000) to view the application.
 
 ## Prerequisites
 
